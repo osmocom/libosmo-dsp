@@ -1,4 +1,4 @@
-AC_INIT([libosmosdr],
+AC_INIT([libosmo-sdr],
         m4_esyscmd([./git-version-gen .tarball-version]),
         [openbsc-devel@lists.openbsc.org])
 
