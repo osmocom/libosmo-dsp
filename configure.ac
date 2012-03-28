@@ -1,6 +1,6 @@
 AC_INIT([libosmo-sdr],
         m4_esyscmd([./git-version-gen .tarball-version]),
-        [openbsc-devel@lists.openbsc.org])
+        [gmr@lists.osmocom.org])
 
 AM_INIT_AUTOMAKE([dist-bzip2])
 
