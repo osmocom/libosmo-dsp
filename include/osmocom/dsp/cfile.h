@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __OSMO_SDR_CFILE_H__
-#define __OSMO_SDR_CFILE_H__
+#ifndef __OSMO_DSP_CFILE_H__
+#define __OSMO_DSP_CFILE_H__
 
 /*! \defgroup cfile .cfile helpers
  *  @{
@@ -47,4 +47,4 @@ void cfile_release(struct cfile *cf);
 
 /*! @} */
 
-#endif /* __OSMO_SDR_CFILE_H__ */
+#endif /* __OSMO_DSP_CFILE_H__ */

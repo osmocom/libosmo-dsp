@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __OSMO_SDR_CXVEC_H__
-#define __OSMO_SDR_CXVEC_H__
+#ifndef __OSMO_DSP_CXVEC_H__
+#define __OSMO_DSP_CXVEC_H__
 
 /*! \defgroup cxvec Complex vectors
  *  @{
@@ -64,4 +64,4 @@ osmo_cxvec_dbg_dump(struct osmo_cxvec *cv, const char *fname);
 
 /*! @} */
 
-#endif /* __OSMO_SDR_CXVEC_H__ */
+#endif /* __OSMO_DSP_CXVEC_H__ */

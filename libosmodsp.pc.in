@@ -3,8 +3,8 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: Osmocom SDR Library
+Name: Osmocom DSP Library
 Description: C Utility Library
 Version: @VERSION@
-Libs: -L${libdir} -losmosdr -lm
+Libs: -L${libdir} -losmodsp -lm
 Cflags: -I${includedir}/

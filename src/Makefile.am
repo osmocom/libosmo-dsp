@@ -5,7 +5,7 @@ LIBVERSION=0:0:0
 INCLUDES = $(all_includes) -I$(top_srcdir)/include
 AM_CFLAGS = -fPIC -Wall -ffast-math
 
-lib_LTLIBRARIES = libosmosdr.la
+lib_LTLIBRARIES = libosmodsp.la
 
-libosmosdr_la_SOURCES = cfile.c cxvec.c cxvec_math.c
-libosmosdr_la_LDFALGS = -version-info $(LIBVERSION)
+libosmodsp_la_SOURCES = cfile.c cxvec.c cxvec_math.c
+libosmodsp_la_LDFALGS = -version-info $(LIBVERSION)

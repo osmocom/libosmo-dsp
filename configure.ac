@@ -1,4 +1,4 @@
-AC_INIT([libosmo-sdr],
+AC_INIT([libosmodsp],
         m4_esyscmd([./git-version-gen .tarball-version]),
         [gmr@lists.osmocom.org])
 
@@ -38,10 +38,10 @@ dnl Generate the output
 AM_CONFIG_HEADER(config.h)
 
 AC_OUTPUT(
-	libosmosdr.pc
+	libosmodsp.pc
 	include/Makefile
 	include/osmocom/Makefile
-	include/osmocom/sdr/Makefile
+	include/osmocom/dsp/Makefile
 	src/Makefile
 	Makefile
 	Doxyfile

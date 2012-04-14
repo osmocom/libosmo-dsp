@@ -35,8 +35,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <osmocom/sdr/cxvec.h>
-#include <osmocom/sdr/cxvec_math.h>
+#include <osmocom/dsp/cxvec.h>
+#include <osmocom/dsp/cxvec_math.h>
 
 /*! \brief Scale a complex vector (multiply by a constant)
  *  \param[in] in Input complex vector

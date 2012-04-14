@@ -35,7 +35,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <osmocom/sdr/cxvec.h>
+#include <osmocom/dsp/cxvec.h>
 
 /*! \brief Initialize a vector structure with a given data array
  *  \param[out] cv The vector to be initialized

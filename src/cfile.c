@@ -39,7 +39,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include <osmocom/sdr/cfile.h>
+#include <osmocom/dsp/cfile.h>
 
 
 /*! \brief .cfile loader: mmap() the data into memory (read-only)

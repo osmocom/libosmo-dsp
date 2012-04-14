@@ -5,7 +5,7 @@ INCLUDES = $(all_includes) -I$(top_srcdir)/include
 SUBDIRS = include src
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libosmosdr.pc
+pkgconfig_DATA = libosmodsp.pc
 
 BUILT_SOURCES = $(top_srcdir)/.version
 $(top_srcdir)/.version:

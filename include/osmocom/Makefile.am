@@ -1,1 +1,1 @@
-SUBDIRS=sdr
+SUBDIRS=dsp

@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __OSMO_SDR_CXVEC_MATH_H__
-#define __OSMO_SDR_CXVEC_MATH_H__
+#ifndef __OSMO_DSP_CXVEC_MATH_H__
+#define __OSMO_DSP_CXVEC_MATH_H__
 
 /*! \defgroup cxvec_math Complex vectors math and signal processing
  *  \ingroup cxvec
@@ -37,7 +37,7 @@
 #include <complex.h>
 #include <math.h>
 
-#include <osmocom/sdr/cxvec.h>
+#include <osmocom/dsp/cxvec.h>
 
 
 	/* Generic math stuff */
@@ -120,4 +120,4 @@ osmo_cxvec_sig_normalize(struct osmo_cxvec *sig, int decim, float freq_shift,
 
 /*! @} */
 
-#endif /* __OSMO_SDR_CXVEC_MATH_H__ */
+#endif /* __OSMO_DSP_CXVEC_MATH_H__ */
