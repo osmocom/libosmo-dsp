@@ -110,4 +110,4 @@ cfile_release(struct cfile *cf)
 	free(cf);
 }
 
-/*! }@ */
+/*! @} */

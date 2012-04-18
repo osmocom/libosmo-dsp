@@ -118,6 +118,6 @@ struct osmo_cxvec *
 osmo_cxvec_sig_normalize(struct osmo_cxvec *sig, int decim, float freq_shift,
                          struct osmo_cxvec *out);
 
-/*! }@ */
+/*! @} */
 
 #endif /* __OSMO_SDR_CXVEC_MATH_H__ */

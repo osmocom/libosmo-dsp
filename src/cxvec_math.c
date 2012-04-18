@@ -529,4 +529,4 @@ osmo_cxvec_sig_normalize(struct osmo_cxvec *sig, int decim, float freq_shift,
 	return out;
 }
 
-/*! }@ */
+/*! @} */

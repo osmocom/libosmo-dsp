@@ -45,6 +45,6 @@ struct cfile {
 struct cfile *cfile_load(const char *filename);
 void cfile_release(struct cfile *cf);
 
-/*! }@ */
+/*! @} */
 
 #endif /* __OSMO_SDR_CFILE_H__ */

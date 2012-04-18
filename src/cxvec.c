@@ -128,4 +128,4 @@ osmo_cxvec_dbg_dump(struct osmo_cxvec *cv, const char *fname)
 	fclose(f);
 }
 
-/*! }@ */
+/*! @} */

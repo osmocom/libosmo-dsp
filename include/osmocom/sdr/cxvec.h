@@ -62,6 +62,6 @@ osmo_cxvec_free(struct osmo_cxvec *cv);
 void
 osmo_cxvec_dbg_dump(struct osmo_cxvec *cv, const char *fname);
 
-/*! }@ */
+/*! @} */
 
 #endif /* __OSMO_SDR_CXVEC_H__ */
