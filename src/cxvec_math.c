@@ -132,6 +132,7 @@ osmo_cxvec_rotate(const struct osmo_cxvec *in, float rps,
  *  \param[in] f First input complex vector
  *  \param[in] g Second input complex vector
  *  \param[in] type The convolution span type
+ *  \param[out] out Output complex vector
  *  \returns The output complex vector (or NULL if error)
  *
  * The convolution of discrete sequences is defined as :
