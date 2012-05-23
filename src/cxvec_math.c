@@ -128,6 +128,80 @@ osmo_cxvec_rotate(const struct osmo_cxvec *in, float rps,
 	return out;
 }
 
+/*! \brief Fractionally delay a vector while maintaining its length
+ *  \param[in] in Input complex vector
+ *  \param[in] delay The fractional delay to apply
+ *  \param[out] out Output complex vector
+ *  \returns The output complex vector (or NULL if error)
+ *
+ * The output always has the same length. Samples pushed out by
+ * the delays are lost and new ones filled with zeroes are pushed in.
+ *
+ * The output vector parameter 'out' can be NULL to allocate a new
+ * vector, or can be equal to the 'in' input vector to perform the
+ * transform in-place. If it's different, it must be long enough
+ * to contain the result (i.e. in->len)
+ */
+struct osmo_cxvec *
+osmo_cxvec_delay(const struct osmo_cxvec *in, float delay,
+                 struct osmo_cxvec *out)
+{
+	int ofs_int = (int) roundf(delay);
+	float ofs_frac = delay - ofs_int;
+	const struct osmo_cxvec *shifted_vect = NULL;
+	int i, j;
+
+	/* Get output vector */
+	if (!out)
+		out = osmo_cxvec_alloc(in->len);
+	else if (out->max_len < in->len)
+		return NULL;
+
+	/* Set output length / flags */
+	out->len = in->len;
+	out->flags = in->flags;
+
+	/* Fractional offset (if reasonable) */
+	if (fabs(ofs_frac) > 0.05f) {
+		float complex _d[21];
+		struct osmo_cxvec _sinc_vect, *sinc_vect = &_sinc_vect;
+
+		/* Create sinc vector */
+		osmo_cxvec_init_from_data(sinc_vect, _d, 21);
+
+		for (i=0; i<21; i++)
+			sinc_vect->data[i] = osmo_sinc(M_PIf * (i - 10.0f - ofs_frac));
+
+		sinc_vect->flags |= CXVEC_FLG_REAL_ONLY;
+
+		/* Convolve */
+		shifted_vect = osmo_cxvec_convolve(sinc_vect, in, CONV_NO_DELAY, NULL);
+	}
+
+	if (!shifted_vect)		/* Also covers failure of convolve ... */
+		shifted_vect = in;
+
+	/* Integer offset */
+	if (ofs_int < 0) {
+		ofs_int = - ofs_int;
+		for (i=0; i<(shifted_vect->len-ofs_int); i++)
+			out->data[i] = shifted_vect->data[i+ofs_int];
+		for (; i<in->len; i++)
+			out->data[i] = 0.0f;
+	} else {
+		for (i=in->len-1,j=shifted_vect->len-1; i>=ofs_int; i--, j--)
+			out->data[i] = shifted_vect->data[j-ofs_int];
+		for (; i>=0; i--)
+			out->data[i] = 0.0f;
+	}
+
+	/* Release */
+	if (in != shifted_vect)
+		osmo_cxvec_free((struct osmo_cxvec *)shifted_vect);
+
+	return out;
+}
+
 /*! \brief Convolve two complex vectors
  *  \param[in] f First input complex vector
  *  \param[in] g Second input complex vector

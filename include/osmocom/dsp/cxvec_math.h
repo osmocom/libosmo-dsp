@@ -78,6 +78,10 @@ struct osmo_cxvec *
 osmo_cxvec_rotate(const struct osmo_cxvec *in, float freq_shift,
                   struct osmo_cxvec *out);
 
+struct osmo_cxvec *
+osmo_cxvec_delay(const struct osmo_cxvec *v, float delay,
+                 struct osmo_cxvec *out);
+
 /*! \brief Various possible types of convolution span */
 enum osmo_cxvec_conv_type {
 	/*! \brief Full span (every possible overlap of f onto g) */
