@@ -52,7 +52,7 @@
  * to contain the result (i.e. in->len)
  */
 struct osmo_cxvec *
-osmo_cxvec_scale(struct osmo_cxvec *in, float complex scale,
+osmo_cxvec_scale(const struct osmo_cxvec *in, float complex scale,
                  struct osmo_cxvec *out)
 {
 	int i;
@@ -109,7 +109,7 @@ osmo_cxvec_scale(struct osmo_cxvec *in, float complex scale,
  * to contain the result (i.e. in->len)
  */
 struct osmo_cxvec *
-osmo_cxvec_rotate(struct osmo_cxvec *in, float rps,
+osmo_cxvec_rotate(const struct osmo_cxvec *in, float rps,
                   struct osmo_cxvec *out)
 {
 	int i;
@@ -150,7 +150,7 @@ osmo_cxvec_rotate(struct osmo_cxvec *in, float rps,
  * (length depends on the exact convolution type)
  */
 struct osmo_cxvec *
-osmo_cxvec_convolve(struct osmo_cxvec *f, struct osmo_cxvec *g,
+osmo_cxvec_convolve(const struct osmo_cxvec *f, const struct osmo_cxvec *g,
                     enum osmo_cxvec_conv_type type, struct osmo_cxvec *out)
 {
 	int Lf, Lg, Lo, si, ei, i, jf, jg;
@@ -257,8 +257,8 @@ osmo_cxvec_convolve(struct osmo_cxvec *f, struct osmo_cxvec *g,
  * (i.e. g->len - f->len + 1)
  */
 struct osmo_cxvec *
-osmo_cxvec_correlate(struct osmo_cxvec *f, struct osmo_cxvec *g, int g_corr_step,
-                     struct osmo_cxvec *out)
+osmo_cxvec_correlate(const struct osmo_cxvec *f, const struct osmo_cxvec *g,
+                     int g_corr_step, struct osmo_cxvec *out)
 {
 	int l, m, n, mn;
 	int f_real, g_real;
@@ -321,7 +321,7 @@ osmo_cxvec_correlate(struct osmo_cxvec *f, struct osmo_cxvec *g, int g_corr_step
  * pos must be >= 0 and < cv->len
  */
 float complex
-osmo_cxvec_interpolate_point(struct osmo_cxvec *cv, float pos)
+osmo_cxvec_interpolate_point(const struct osmo_cxvec *cv, float pos)
 {
 	const int N = 10;
 	int b, e, i;
@@ -361,7 +361,7 @@ osmo_cxvec_interpolate_point(struct osmo_cxvec *cv, float pos)
  *  \returns Peak position with sub-sample accuracy
  */
 float
-osmo_cxvec_peak_energy_find(struct osmo_cxvec *cv, int win_size,
+osmo_cxvec_peak_energy_find(const struct osmo_cxvec *cv, int win_size,
                             enum osmo_cxvec_peak_alg alg,
                             float complex *peak_val_p)
 {
@@ -490,7 +490,8 @@ osmo_cxvec_peak_energy_find(struct osmo_cxvec *cv, int win_size,
  * the result (i.e. (sig->len + decim - 1) / decim)
  */
 struct osmo_cxvec *
-osmo_cxvec_sig_normalize(struct osmo_cxvec *sig, int decim, float freq_shift,
+osmo_cxvec_sig_normalize(const struct osmo_cxvec *sig,
+                         int decim, float freq_shift,
                          struct osmo_cxvec *out)
 {
 	float complex avg = 0.0f;

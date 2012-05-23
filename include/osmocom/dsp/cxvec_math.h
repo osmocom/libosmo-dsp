@@ -71,11 +71,11 @@ osmo_normsqf(float complex c)
 	/* Complex vector math */
 
 struct osmo_cxvec *
-osmo_cxvec_scale(struct osmo_cxvec *in, float complex scale,
+osmo_cxvec_scale(const struct osmo_cxvec *in, float complex scale,
                  struct osmo_cxvec *out);
 
 struct osmo_cxvec *
-osmo_cxvec_rotate(struct osmo_cxvec *in, float freq_shift,
+osmo_cxvec_rotate(const struct osmo_cxvec *in, float freq_shift,
                   struct osmo_cxvec *out);
 
 /*! \brief Various possible types of convolution span */
@@ -89,15 +89,15 @@ enum osmo_cxvec_conv_type {
 };
 
 struct osmo_cxvec *
-osmo_cxvec_convolve(struct osmo_cxvec *f, struct osmo_cxvec *g,
+osmo_cxvec_convolve(const struct osmo_cxvec *f, const struct osmo_cxvec *g,
                     enum osmo_cxvec_conv_type type, struct osmo_cxvec *out);
 
 struct osmo_cxvec *
-osmo_cxvec_correlate(struct osmo_cxvec *f, struct osmo_cxvec *g, int g_corr_step,
-                     struct osmo_cxvec *out);
+osmo_cxvec_correlate(const struct osmo_cxvec *f, const struct osmo_cxvec *g,
+                     int g_corr_step, struct osmo_cxvec *out);
 
 float complex
-osmo_cxvec_interpolate_point(struct osmo_cxvec *cv, float pos);
+osmo_cxvec_interpolate_point(const struct osmo_cxvec *cv, float pos);
 
 /*! \brief Various possible peak finding algorithms */
 enum osmo_cxvec_peak_alg {
@@ -110,12 +110,13 @@ enum osmo_cxvec_peak_alg {
 };
 
 float
-osmo_cxvec_peak_energy_find(struct osmo_cxvec *cv, int win_size,
+osmo_cxvec_peak_energy_find(const struct osmo_cxvec *cv, int win_size,
                             enum osmo_cxvec_peak_alg alg,
                             float complex *peak_val_p);
 
 struct osmo_cxvec *
-osmo_cxvec_sig_normalize(struct osmo_cxvec *sig, int decim, float freq_shift,
+osmo_cxvec_sig_normalize(const struct osmo_cxvec *sig,
+                         int decim, float freq_shift,
                          struct osmo_cxvec *out);
 
 /*! @} */
