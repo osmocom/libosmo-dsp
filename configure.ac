@@ -11,8 +11,7 @@ dnl checks for programs
 AC_PROG_MAKE_SET
 AC_PROG_CC
 AC_PROG_INSTALL
-LT_INIT
-AC_PROG_LIBTOOL
+LT_INIT([pic-only])
 
 AC_PATH_PROG(DOXYGEN,doxygen,false)
 AM_CONDITIONAL(HAVE_DOXYGEN, test $DOXYGEN != false)

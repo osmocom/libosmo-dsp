@@ -3,7 +3,7 @@
 LIBVERSION=0:0:0
 
 INCLUDES = $(all_includes) -I$(top_srcdir)/include
-AM_CFLAGS = -fPIC -Wall -ffast-math
+AM_CFLAGS = -Wall -ffast-math
 
 lib_LTLIBRARIES = libosmodsp.la
 
