@@ -35,7 +35,7 @@ CFLAGS="$saved_CFLAGS"
 AC_SUBST(SYMBOL_VISIBILITY)
 
 dnl Generate the output
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADER(config.h)
 
 AC_OUTPUT(
 	libosmodsp.pc
