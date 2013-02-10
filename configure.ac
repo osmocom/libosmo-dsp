@@ -19,8 +19,8 @@ AM_CONDITIONAL(HAVE_DOXYGEN, test $DOXYGEN != false)
 AC_CONFIG_MACRO_DIR([m4])
 
 dnl checks for header files
-AC_HEADER_STDC
-AC_CHECK_HEADERS(complex.h math.h fcntl.h unistd.h sys/mman.h sys/types.h sys/stat.h)
+AC_CHECK_HEADERS([complex.h fcntl.h math.h stdio.h stdlib.h string.h unistd.h sys/mman.h sys/types.h sys/stat.h],,
+	AC_MSG_ERROR([Missing required header files.]))
 
 # The following test is taken from WebKit's webkit.m4
 saved_CFLAGS="$CFLAGS"
