@@ -18,6 +18,9 @@ AM_CONDITIONAL(HAVE_DOXYGEN, test $DOXYGEN != false)
 
 AC_CONFIG_MACRO_DIR([m4])
 
+dnl checks for libraries
+PKG_CHECK_MODULES(FFTW3F, fftw3f >= 3.2.0)
+
 dnl checks for header files
 AC_CHECK_HEADERS([complex.h fcntl.h math.h stdio.h stdlib.h string.h unistd.h sys/mman.h sys/types.h sys/stat.h],,
 	AC_MSG_ERROR([Missing required header files.]))

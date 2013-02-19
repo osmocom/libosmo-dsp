@@ -3,9 +3,9 @@
 LIBVERSION=0:0:0
 
 INCLUDES = $(all_includes) -I$(top_srcdir)/include
-AM_CFLAGS = -Wall -ffast-math
+AM_CFLAGS = -Wall -ffast-math $(FFTW3F_CFLAGS)
 
 lib_LTLIBRARIES = libosmodsp.la
 
-libosmodsp_la_SOURCES = cfile.c cxvec.c cxvec_math.c
-libosmodsp_la_LDFLAGS = -version-info $(LIBVERSION)
+libosmodsp_la_SOURCES = cfile.c cxvec.c cxvec_math.c iqbal.c
+libosmodsp_la_LDFLAGS = -version-info $(LIBVERSION) $(FFTW3F_LIBS)
