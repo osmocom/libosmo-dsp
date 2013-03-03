@@ -54,7 +54,7 @@
  *
  *  The input and output buffers can be the same for in-place modification.
  *
- *  The exact applied is out[i] = (a * (1 + mag)) + (b + phase * a) * i
+ *  The applied transform is out[i] = (a * (1 + mag)) + (b + phase * a) * i
  *  (with in[i] = a+bi).
  */
 void
