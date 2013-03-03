@@ -197,8 +197,7 @@ _iqbal_objfn_value(struct _iqbal_state *state, float x[2])
 static void
 _iqbal_objfn_gradient(struct _iqbal_state *state, float x[2], float v, float grad[2])
 {
-	#define GRAD_STEP	0.001f
-
+	const float GRAD_STEP = 0.001f;
 	float xd[2], vd[2];
 
 	xd[0] = x[0] + GRAD_STEP; xd[1] = x[1];
