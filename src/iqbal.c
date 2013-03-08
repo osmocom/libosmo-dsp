@@ -98,22 +98,54 @@ osmo_iqbal_cxvec_fix(const struct osmo_cxvec *in, float mag, float phase,
 	return out;
 }
 
+
+/*! \brief Cache for \ref _osmo_iqbal_estimate when doing lots of calls */
+struct _iqbal_estimate_state {
+	float complex *fft;	/*!< \brief Temporary memory for FFT */
+	fftwf_plan fft_plan;	/*!< \brief FFTW plan */
+};
+
+/*! \brief Release a cache object created by \ref _osmo_iqbal_estimate */
+static void
+_osmo_iqbal_estimate_release(struct _iqbal_estimate_state *state)
+{
+	if (!state)
+		return;
+
+	fftwf_destroy_plan(state->fft_plan);
+	free(state->fft);
+
+	free(state);
+}
+
 /*! \brief Objectively estimate IQ balance in a given complex buffer
  *  \param[in] data Input complex buffer (at least fft_size * fft_count samples)
  *  \param[in] fft_size Size of the FFT to use internally
  *  \param[in] fft_count The number of consecutive FFT to use internally
+ *  \param[out] state_p Cache object for multiple calls (can be NULL)
  *  \returns A number >= 0.0f estimating the IQ balance (the lower, the better)
+ *
+ *  The Cache object should only be used for multiple calls with the same parameters
+ *  and the same size of input vector. Once you don't plan on using it anymore,
+ *  you should call \ref _osmo_iqbal_estimate_release . The initial pointer value
+ *  should also be initialized to NULL.
  */
-float
-osmo_iqbal_estimate(const float complex *data, int fft_size, int fft_count)
+static float
+_osmo_iqbal_estimate(const float complex *data, int fft_size, int fft_count,
+                     struct _iqbal_estimate_state **state_p)
 {
 	float complex *fft;
 	float est = 0.0f;
 	fftwf_plan fft_plan;
 	int i, j;
 
-	fft = malloc(sizeof(float complex) * fft_size);
-	fft_plan = fftwf_plan_dft_1d(fft_size, fft, fft, FFTW_FORWARD, FFTW_ESTIMATE);
+	if (state_p && *state_p) {
+		fft = (*state_p)->fft;
+		fft_plan = (*state_p)->fft_plan;
+	} else {
+		fft = malloc(sizeof(float complex) * fft_size);
+		fft_plan = fftwf_plan_dft_1d(fft_size, fft, fft, FFTW_FORWARD, FFTW_ESTIMATE);
+	}
 
 	for (i=0; i<fft_count; i++)
 	{
@@ -130,10 +162,28 @@ osmo_iqbal_estimate(const float complex *data, int fft_size, int fft_count)
 
 	/* est /= fft_count; */
 
-	fftwf_destroy_plan(fft_plan);
-	free(fft);
+	if (state_p && !*state_p) {
+		*state_p = malloc(sizeof(struct _iqbal_estimate_state));
+		(*state_p)->fft = fft;
+		(*state_p)->fft_plan = fft_plan;
+	} else if (!state_p) {
+		fftwf_destroy_plan(fft_plan);
+		free(fft);
+	}
 
 	return est;
+}
+
+/*! \brief Objectively estimate IQ balance in a given complex buffer
+ *  \param[in] data Input complex buffer (at least fft_size * fft_count samples)
+ *  \param[in] fft_size Size of the FFT to use internally
+ *  \param[in] fft_count The number of consecutive FFT to use internally
+ *  \returns A number >= 0.0f estimating the IQ balance (the lower, the better)
+ */
+float
+osmo_iqbal_estimate(const float complex *data, int fft_size, int fft_count)
+{
+	return _osmo_iqbal_estimate(data, fft_size, fft_count, NULL);
 }
 
 /*! \brief Objectively estimate IQ balance in a given complex vector
@@ -172,6 +222,7 @@ struct _iqbal_state
 	const struct osmo_cxvec *org;	/*!< \brief Original vector */
 	struct osmo_cxvec *tmp;		/*!< \brief Temporary vector */
 	int feval;			/*!< \brief # of function evaluation */
+	struct _iqbal_estimate_state *cache; /*!< \brief Cache for estimate func */
 };
 
 /*! \brief Optimization objective function - Value
@@ -184,8 +235,9 @@ _iqbal_objfn_value(struct _iqbal_state *state, float x[2])
 {
 	state->feval++;
 	osmo_iqbal_cxvec_fix(state->org, x[0], x[1], state->tmp);
-	return osmo_iqbal_cxvec_estimate(state->tmp,
-		state->opts->fft_size, state->opts->fft_count);
+	return _osmo_iqbal_estimate(state->tmp->data,
+		state->opts->fft_size, state->opts->fft_count,
+		&state->cache);
 }
 
 /*! \brief Optimization objective function - Gradient estimation
@@ -256,6 +308,7 @@ osmo_iqbal_cxvec_optimize(const struct osmo_cxvec *sig, float *mag, float *phase
 	state->tmp = osmo_cxvec_alloc(sig->len);
 	state->opts = opts;
 	state->feval = 0;
+	state->cache = NULL;
 
 	if (opts->start_at_prev) {
 		cx[0] = *mag;
@@ -290,6 +343,7 @@ osmo_iqbal_cxvec_optimize(const struct osmo_cxvec *sig, float *mag, float *phase
 	}
 
 	osmo_cxvec_free(state->tmp);
+	_osmo_iqbal_estimate_release(state->cache);
 
 	*mag   = cx[0];
 	*phase = cx[1];
