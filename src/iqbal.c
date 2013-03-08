@@ -319,26 +319,27 @@ osmo_iqbal_cxvec_optimize(const struct osmo_cxvec *sig, float *mag, float *phase
 	}
 
 	cv = _iqbal_objfn_val_gradient(state, cx, cgrad);
-	step = 0.1f * cv / (fabs(cgrad[0]) + fabs(cgrad[1]));
+	step = cv / (fabs(cgrad[0]) + fabs(cgrad[1]));
 
 	for (i=0; i<opts->max_iter; i++)
 	{
-		nx[0] = cx[0] - step * cgrad[0];
-		nx[1] = cx[1] - step * cgrad[1];
+		nx[0] = cx[0] - step * (cgrad[0] / (fabs(cgrad[0]) + fabs(cgrad[1])));
+		nx[1] = cx[1] - step * (cgrad[1] / (fabs(cgrad[0]) + fabs(cgrad[1])));
 
 		nv = _iqbal_objfn_value(state, nx);
 
-		if (nv < cv) {
+		if (nv <= cv) {
 			p = (cv - nv) / cv;
-			if (p < 0.01f)
-				break;
 
 			cx[0] = nx[0];
 			cx[1] = nx[1];
 			cv = nv;
 			_iqbal_objfn_gradient(state, cx, cv, cgrad);
+
+			if (p < 0.01f)
+				break;
 		} else {
-			step /= 2.0f;
+			step /= 2.0 * (nv / cv);
 		}
 	}
 
