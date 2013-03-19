@@ -207,6 +207,17 @@ osmo_iqbal_cxvec_estimate(const struct osmo_cxvec *sig,
 /* IQ balance optimization                                                  */
 /* ------------------------------------------------------------------------ */
 
+/*
+ * The actual algorithm used here is inspired by the IQ balancer of SDR#
+ * by Youssef Touil and described here :
+ *
+ * http://sdrsharp.com/index.php/automatic-iq-correction-algorithm
+ *
+ * The main differences are:
+ *  - Objective function uses complex correlation of left/right side of FFT
+ *  - Optimization based on steepest gradient with dynamic step size
+ */
+
 /*! \brief Default values for the optimization algorithm */
 const struct osmo_iqbal_opts osmo_iqbal_default_opts = {
 	.fft_size	= 1024,
