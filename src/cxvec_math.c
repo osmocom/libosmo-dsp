@@ -373,13 +373,13 @@ osmo_cxvec_correlate(const struct osmo_cxvec *f, const struct osmo_cxvec *g,
 			complex float v = 0.0f;
 			for (n=0,mn=m; n<f->len; n++,mn+=g_corr_step)
 				v += f->data[n] * crealf(g->data[mn]);
-			out->data[m] = conj(v);
+			out->data[m] = conjf(v);
 		}
 	} else {
 		for (m=0; m<l; m++) {
 			complex float v = 0.0f;
 			for (n=0,mn=m; n<f->len; n++,mn+=g_corr_step)
-				v += conj(f->data[n]) * g->data[mn];
+				v += conjf(f->data[n]) * g->data[mn];
 			out->data[m] = v;
 		}
 	}
