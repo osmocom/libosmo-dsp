@@ -428,6 +428,51 @@ osmo_cxvec_interpolate_point(const struct osmo_cxvec *cv, float pos)
 	return val;
 }
 
+/*! \brief Find the index of the N highest energy (\f$|x|^2\f$) peaks
+ *  \param[in] cv Input complex vector
+ *  \param[out] peaks_idx Return array of the peak indexes
+ *  \param[in] Size of the \ref peaks_idx return array
+ *  \returns Number of peaks (will be N if there is enough points)
+ */
+int
+osmo_cxvec_peaks_scan(const struct osmo_cxvec *cv, int *peaks_idx, int N)
+{
+	int i, j;
+	float peaks_mag[N];
+
+	/* Pre-init */
+	for (i=0; i<N; i++) {
+		peaks_idx[i] = -1;
+		peaks_mag[i] = 0.0f;
+	}
+
+	/* Scan all */
+	for (i=0; i<cv->len; i++)
+	{
+		/* Magnitude */
+		float mag = osmo_normsqf(cv->data[i]);
+
+		/* Worth it ? */
+		if (mag < peaks_mag[N-1])
+			continue;
+
+		/* Find insertion point in sorted array and pre-move */
+		for (j=N-1; j>0; j--) {
+			if (mag < peaks_mag[j-1])
+				break;
+
+			peaks_mag[j] = peaks_mag[j-1];
+			peaks_idx[j] = peaks_idx[j-1];
+		}
+
+		/* Do the insert */
+		peaks_mag[j] = mag;
+		peaks_idx[j] = i;
+	}
+
+	return i < N ? i : N;
+}
+
 /*! \brief Find the maximum energy (\f$|x|^2\f$) peak in a sequence
  *  \param[in] cv Input complex vector
  *  \param[in] win_size Size of the window (for algorithms using windows)

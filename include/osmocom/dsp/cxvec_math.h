@@ -103,6 +103,9 @@ osmo_cxvec_correlate(const struct osmo_cxvec *f, const struct osmo_cxvec *g,
 float complex
 osmo_cxvec_interpolate_point(const struct osmo_cxvec *cv, float pos);
 
+int
+osmo_cxvec_peaks_scan(const struct osmo_cxvec *cv, int *peaks_idx, int N);
+
 /*! \brief Various possible peak finding algorithms */
 enum osmo_cxvec_peak_alg {
 	/*! \brief Weigthed position for the max pwr window */
