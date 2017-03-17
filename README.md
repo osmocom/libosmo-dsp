@@ -33,7 +33,7 @@ Mailing List
 
 Discussions related to libosmo-dsp are happening on the
 osmocom-sdr@lists.osmocom.org mailing list, please see
-https://lists.osmocom.org/mailman/listinfo/osmocom-sdr for subscription
+<https://lists.osmocom.org/mailman/listinfo/osmocom-sdr> for subscription
 options and the list archive.
 
 Please observe the [Osmocom Mailing List
@@ -44,7 +44,7 @@ Contributing
 ------------
 
 Our coding standards are described at
-https://osmocom.org/projects/cellular-infrastructure/wiki/Coding_standards
+<https://osmocom.org/projects/cellular-infrastructure/wiki/Coding_standards>
 
 We are receiving patch submissions via e-mail to the above-mentioned
 mailing list.
