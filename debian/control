@@ -1,0 +1,69 @@
+Source: libosmodsp
+Section: libs
+Priority: optional
+Maintainer: Harald Welte <laforge@gnumonks.org>
+Build-Depends: debhelper (>= 9),
+               autotools-dev,
+               autoconf,
+               automake,
+               libtool,
+               dh-autoreconf,
+               libdpkg-perl,
+               git,
+               doxygen,
+               pkg-config,
+               libfftw3-dev
+Standards-Version: 3.9.6
+Vcs-Browser: http://git.osmocom.org/libosmo-dsp/
+Vcs-Git: git://git.osmocom.org/libosmo-dsp.git
+Homepage: https://osmocom.org/projects/libosmo-dsp
+
+Package: libosmodsp0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Multi-Arch: same
+Description: Osmocom Software Defined Radio Digital Signal Processing Library
+ C-language library for common DSP (Digital Signal Processing) primitives
+ for SDR (Software Defined Radio).  They are part of the Osmocom (Open
+ Source Mobile Communications) project.
+
+Package: libosmodsp-dev
+Section: libdevel
+Architecture: any
+Depends: ${misc:Depends},
+         libosmodsp0 (= ${binary:Version})
+Multi-Arch: same
+Description: Development headers for Osmocom DSP Library
+ C-language library for common DSP (Digital Signal Processing) primitives
+ for SDR (Software Defined Radio).  They are part of the Osmocom (Open
+ Source Mobile Communications) project.
+ .
+ This package contains the development files needed for developing with
+ the libosmodsp library.
+
+Package: libosmodsp-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends},
+         libosmodsp0,
+         libjs-jquery
+Description: Documentation for the Osmocom DSP Library
+ C-language library for common DSP (Digital Signal Processing) primitives
+ for SDR (Software Defined Radio).  They are part of the Osmocom (Open
+ Source Mobile Communications) project.
+ .
+ This package contains the documentation for the libosmodsp library.
+
+Package: libosmodsp-dbg
+Section: debug
+Architecture: any
+Priority: extra
+Depends: libosmodsp0 (= ${binary:Version}), ${misc:Depends}
+Multi-Arch: same
+Description: Debug symbols for Osmocom DSP library
+ C-language library for common DSP (Digital Signal Processing) primitives
+ for SDR (Software Defined Radio).  They are part of the Osmocom (Open
+ Source Mobile Communications) project.
+ .
+ This package contains the debug symbols for the library.

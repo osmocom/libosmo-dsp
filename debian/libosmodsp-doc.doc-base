@@ -1,0 +1,7 @@
+Document: libosmodsp-doc
+Title: Documentation for the libosmods library
+Section: Programming
+
+Format: HTML
+Index: /usr/share/doc/libosmodsp/html/index.html
+Files: /usr/share/doc/libosmodsp/html/*.html

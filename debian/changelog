@@ -1,0 +1,5 @@
+libosmodsp (0.3.0) testing; urgency=low
+
+  * Initial release.
+
+ -- Harald Welte <laforge@gnumonks.org>  Thu, 17 Jan 2019 17:19:00 +0100
