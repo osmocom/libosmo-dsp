@@ -1,3 +1,9 @@
+libosmodsp (0.4.0) unstable; urgency=medium
+
+  * Use release helper from libosmcoore
+
+ -- Harald Welte <laforge@gnumonks.org>  Sat, 26 Jan 2019 17:52:49 +0100
+
 libosmodsp (0.3.0) testing; urgency=low
 
   * Initial release.
