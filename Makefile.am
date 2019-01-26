@@ -37,3 +37,5 @@ DX_CLEAN = doc/html/search/* doc/{html,latex}/* doc/html.tar doc/*.tag doc/doxyg
 endif
 
 MOSTLYCLEANFILES = $(DX_CLEAN)
+
+@RELMAKE@
