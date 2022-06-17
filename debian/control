@@ -14,8 +14,8 @@ Build-Depends: debhelper (>= 9),
                pkg-config,
                libfftw3-dev
 Standards-Version: 3.9.6
-Vcs-Browser: http://git.osmocom.org/libosmo-dsp/
-Vcs-Git: git://git.osmocom.org/libosmo-dsp.git
+Vcs-Browser: https://gitea.osmocom.org/sdr/libosmo-dsp
+Vcs-Git: https://gitea.osmocom.org/sdr/libosmo-dsp
 Homepage: https://osmocom.org/projects/libosmo-dsp
 
 Package: libosmodsp0

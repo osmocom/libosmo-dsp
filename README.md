@@ -17,9 +17,9 @@ GIT Repository
 
 You can clone from the official libosmo-dsp.git repository using
 
-	git clone git://git.osmocom.org/libosmo-dsp.git
+	git clone https://gitea.osmocom.org/sdr/libosmo-dsp
 
-There is a cgit interface at http://git.osmocom.org/libosmo-dsp/
+There is a web interface at <https://gitea.osmocom.org/sdr/libosmo-dsp>
 
 Documentation
 -------------
