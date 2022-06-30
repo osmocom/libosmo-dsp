@@ -15,6 +15,7 @@ dist-hook:
 EXTRA_DIST = \
 	    .version \
 	    contrib/libosmo-dsp.spec.in \
+	    debian \
 	    git-version-gen \
 	    $(NULL)
 
