@@ -81,7 +81,7 @@ AC_CONFIG_HEADER(config.h)
 
 AC_OUTPUT(
 	libosmodsp.pc
-	contrib/libosmo-dsp.spec
+	contrib/libosmodsp.spec
 	include/Makefile
 	include/osmocom/Makefile
 	include/osmocom/dsp/Makefile

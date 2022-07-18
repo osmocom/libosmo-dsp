@@ -6,7 +6,7 @@
 # This file is under MIT license
 
 %define libname libosmodsp0
-Name:           libosmo-dsp
+Name:           libosmodsp
 Version:        @VERSION@
 Release:        0
 Summary:        SDR DSP primitives
@@ -14,7 +14,6 @@ License:        GPL-2.0-only
 Group:          Productivity/Hamradio/Other
 URL:            https://osmocom.org/projects/libosmo-dsp
 Source:         %{name}-%{version}.tar.xz
-Patch0:         HTML_TIMESTAMP.diff
 BuildRequires:  automake >= 1.6
 BuildRequires:  doxygen
 BuildRequires:  fdupes
@@ -52,7 +51,6 @@ A library with SDR DSP primitives headers - Documentation
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 echo "%version" >.tarball-version

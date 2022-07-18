@@ -31,4 +31,4 @@ Doxyfile
 .*.swp
 
 doc/
-contrib/libosmocore.spec
+contrib/libosmodsp.spec
