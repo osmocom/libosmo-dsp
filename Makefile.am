@@ -14,6 +14,7 @@ dist-hook:
 
 EXTRA_DIST = \
 	    .version \
+	    README.md \
 	    contrib/libosmodsp.spec.in \
 	    debian \
 	    git-version-gen \
