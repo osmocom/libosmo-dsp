@@ -33,3 +33,4 @@ Doxyfile
 
 doc/
 contrib/libosmodsp.spec
+include/osmocom/dsp/version.h
